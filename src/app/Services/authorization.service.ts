@@ -8,17 +8,25 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthorizationService {
   private apiEndPoint: string;
+  status:any
 
   constructor(private http: HttpClient) {
     this.apiEndPoint = environment.domainUrl;
   }
 
-  ///Вход в систему за определенной ролью(логин)
-  public getAcces(perPage:number,token:string): Observable<any>{
+  public getToken(login: string, password: string):Observable<any>{
+    let token:any;
     const params = new HttpParams()
-      .set('perPage', perPage.toString())
-    const myHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
-    return this.http.get(this.apiEndPoint + "user?" + params,{headers:myHeaders});
+    
+      .set('email', login)
+      .set('password', password)
+      return this.http.post(this.apiEndPoint + "login", params,{observe: 'response'})
+      
   }
+
+  
+  public logout (): void  {    
+    localStorage.setItem ( 'isLoggedIn' , 'false' );    
+    localStorage.removeItem ( 'token' );    
+    }
 }

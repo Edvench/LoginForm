@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthorizationService } from '../Services/authorization.service';
-import { AuthenticationService } from '../Services/authentication.service';
 import { User } from '../Entity/User';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-modal',
@@ -13,13 +14,15 @@ export class AuthorizationComponent implements OnInit {
 
   private formGroup:FormGroup;
   private token: string;
+  private role:string;
   private users: User[] = []; 
-  // private fullResponce: any;
+  error:boolean = false;
+  
 
   constructor(
     private fb:FormBuilder,
-    private $authorization:AuthorizationService,
-    private $authentication:AuthenticationService
+    private auth:AuthorizationService,
+    private router:Router
     ) { 
     this.formGroup = fb.group({
       emailControl:     ["", [ Validators.required,
@@ -34,25 +37,25 @@ export class AuthorizationComponent implements OnInit {
 
   
   public authorization():void{
-    this.$authentication.getToken(
+    let token;
+    this.auth.getToken(
       this.formGroup.controls["emailControl"].value,
       this.formGroup.controls["passwordControl"].value,
-    ).subscribe(
-      response => {
-        this.token = response.token;
-        console.log(response);
-        console.log(this.token);
-        this.$authorization.getAcces(-1,this.token).subscribe(
-          response => {
-            // this.fullResponce = response;
-            response.data.forEach(element => {
-              this.users.push(element);
-          });
-          // console.log(this.fullResponce);
-          console.log(this.users)
-          });
-      });
+    ).subscribe(response => {
+      token = response.body.token;
+      localStorage.setItem('token', token);
+      console.log(token);
+      localStorage.setItem('isLoggedIn', "true");  
+      localStorage.setItem('token',token);
+      this.router.navigate(['table']);
+     },
+      error => {this.error = error.error.error; console.log(error.error.error);
+    
+    });
+        
   }
+
+
 
 }
 
