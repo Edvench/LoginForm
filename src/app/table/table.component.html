@@ -1,3 +1,14 @@
 <p>users</p>
-<button mat-raised-button color="primary" type="button" (click)="getUsers()">More Users</button>
+
+<li *ngFor="let user of users">
+    <div class="user-item">
+        <div>CONTENT</div>
+        <div class="task-title">{{user.name}}</div>
+        <div class="task-description">{{user.email}}</div>
+    </div>
+</li>
+<p *ngIf="users.length">
+    <button mat-raised-button color="primary" [disabled]=" countPage + 1  == currentPage" type="button" (click)="getUsers()">More Users</button>
+</p>
+
 <button mat-raised-button color="primary" type="button" (click)="logout()">Logouut</button>

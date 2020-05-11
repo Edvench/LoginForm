@@ -11,6 +11,9 @@ import { RequestTableService } from '../Services/request-table.service';
 })
 export class TableComponent implements OnInit {
   private users: User[] = []; 
+  private countItem:number = 5;
+  private currentPage:number = 1;
+  private countPage:number;
 
   constructor(
     private auth:AuthorizationService,
@@ -22,14 +25,16 @@ export class TableComponent implements OnInit {
   }
 
   public getUsers():void{
-    this.tableService.getUsers(5,2, localStorage.getItem('token')).subscribe(
+    this.tableService.getUsers(this.countItem,this.currentPage, localStorage.getItem('token')).subscribe(
       response => {
         response.data.forEach(element => {
           this.users.push(element);
+          this.countPage = Math.ceil(this.countPage = response.total/this.countItem);      
       });
+      
       console.log(this.users)
       });
-       
+      this.currentPage++;
   }
 
   public logout(){
