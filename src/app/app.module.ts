@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard'; 
+import {MatTableModule} from '@angular/material/table';
+import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +23,7 @@ import { Rout } from './Routing/route';
     AppComponent,
     AuthorizationComponent,
     TableComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,9 @@ import { Rout } from './Routing/route';
     ReactiveFormsModule,
     MatButtonModule,
     HttpClientModule,
-    RouterModule.forRoot(Rout)
+    RouterModule.forRoot(Rout),
+    MatTableModule,
+    
     
 
   ],
@@ -40,6 +44,9 @@ import { Rout } from './Routing/route';
     AuthGuard,
     RouterModule
     
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   bootstrap: [AppComponent]
 })

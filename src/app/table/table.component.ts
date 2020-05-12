@@ -14,6 +14,9 @@ export class TableComponent implements OnInit {
   private countItem:number = 5;
   private currentPage:number = 1;
   private countPage:number;
+  displayedColumns: string[] = ['name', 'email'];
+  
+  
 
   constructor(
     private auth:AuthorizationService,
