@@ -1,29 +1,24 @@
-<p>users</p>
+<p>USERS TABLE</p>
+<mat-table [users]="users" *ngFor="let user of users" class="mat-elevation-z8">
 
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> <strong>Name:</strong> {{user.name}}</mat-header-cell>
+    </ng-container>
 
-    <mat-table [users]="users" *ngFor="let user of users" class="mat-elevation-z8" >
-        
-        <!-- Name Column -->
-        <ng-container matColumnDef="name" >
-            <mat-header-cell *matHeaderCellDef> <strong>Name:</strong> {{user.name}}</mat-header-cell>
-        </ng-container>
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> <strong>Email: </strong>{{user.email}}</mat-header-cell>
+    </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="email" >
-            <mat-header-cell *matHeaderCellDef> <strong>Email: </strong>{{user.email}}</mat-header-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
-
-
-
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
 
 <p *ngIf="users.length">
     <button mat-raised-button color="primary" [disabled]=" countPage + 1  == currentPage" type="button"
         (click)="getUsers()">More Users</button>
+    <!-- <button mat-raised-button color="primary" type="button"
+        (click)="addUser()">Add User</button> -->
+    <button mat-raised-button (click)="openDialog()">Pick one</button>
 </p>
 
 <button mat-raised-button color="primary" type="button" (click)="logout()">Logouut</button>

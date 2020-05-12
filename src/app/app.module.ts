@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard'; 
 import {MatTableModule} from '@angular/material/table';
 import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +19,7 @@ import { TableComponent } from './table/table.component';
 import { ErrorComponent } from './Errors/error/error.component';
 import { RouterModule } from '@angular/router';
 import { Rout } from './Routing/route';
+import { CreateUserModalComponent } from './ModalWindow/create-user-modal/create-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { Rout } from './Routing/route';
     AuthorizationComponent,
     TableComponent,
     ErrorComponent,
+    CreateUserModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +39,8 @@ import { Rout } from './Routing/route';
     HttpClientModule,
     RouterModule.forRoot(Rout),
     MatTableModule,
-    
-    
-
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [
     AuthorizationService,

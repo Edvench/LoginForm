@@ -21,4 +21,14 @@ export class RequestTableService {
 
     return this.http.get(this.apiEndPoint + "user?" + params,{headers:myHeaders});
   }
+
+  public createUser(name:string,email:string,role:string,password:string,token:string): Observable<any> {
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('role', role);
+    formData.append('password', password);
+    const myHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.post(this.apiEndPoint + "user", formData,{headers:myHeaders});
+}
 }

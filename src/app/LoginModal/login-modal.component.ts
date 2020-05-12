@@ -16,7 +16,7 @@ export class AuthorizationComponent implements OnInit {
   private token: string;
   private role:string;
   private users: User[] = []; 
-  error:boolean = false;
+  private error:boolean = false;
   
 
   constructor(
