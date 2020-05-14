@@ -9,16 +9,23 @@
         <mat-header-cell *matHeaderCellDef> <strong>Email: </strong>{{user.email}}</mat-header-cell>
     </ng-container>
 
+    <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> 
+            <button mat-raised-button (click)="openDeleteUserDialog(user.id)">Delete User</button>
+            <button mat-raised-button (click)="openUpdateUserDialog(user.id)">Update User</button>
+        </mat-header-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 
 <p *ngIf="users.length">
-    <button mat-raised-button color="primary" [disabled]=" countPage + 1  == currentPage" type="button"
+    <button mat-raised-button color="primary"  type="button"
         (click)="getUsers()">More Users</button>
-    <!-- <button mat-raised-button color="primary" type="button"
-        (click)="addUser()">Add User</button> -->
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
+
+    <button mat-raised-button (click)="openCreateUserDialog()">Add User</button>
+    
 </p>
 
 <button mat-raised-button color="primary" type="button" (click)="logout()">Logouut</button>

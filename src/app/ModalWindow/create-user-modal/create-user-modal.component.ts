@@ -25,7 +25,7 @@ export class CreateUserModalComponent implements OnInit {
   
   constructor(private fb:FormBuilder,
     private tableService: RequestTableService,
-    public dialogRef: MatDialogRef<CreateUserModalComponent>) {
+    private dialogRef: MatDialogRef<CreateUserModalComponent>) {
     this.formGroup = fb.group({
       nameControl:     ["", [ Validators.required]],
       emailControl:     ["", [ Validators.required,

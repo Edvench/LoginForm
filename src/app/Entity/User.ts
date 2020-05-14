@@ -4,6 +4,7 @@ export class User
         public name: string;
         public email:string;
         public role:string;
-        public createdAt:any;
-        public updatedAt:any;
+        public password:string;
+        public createdAt?:any;
+        public updatedAt?:any;
     }

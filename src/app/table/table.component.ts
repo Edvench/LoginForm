@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { RequestTableService } from '../Services/request-table.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserModalComponent } from '../ModalWindow/create-user-modal/create-user-modal.component';
+import { DeleteUserModalComponent } from '../ModalWindow/delete-user-modal/delete-user-modal.component';
+import { UpdateUserModalComponent } from '../ModalWindow/update-user-modal/update-user-modal.component';
 
 @Component({
   selector: 'app-table',
@@ -16,7 +18,8 @@ export class TableComponent implements OnInit {
   private countItem: number = 5;
   private currentPage: number = 1;
   private countPage: number;
-  displayedColumns: string[] = ['name', 'email'];
+  private userId:number;
+  displayedColumns: string[] = ['name', 'email','options'];
 
 
 
@@ -30,16 +33,49 @@ export class TableComponent implements OnInit {
     this.getUsers();
   }
 
-  public openDialog(): void {
+  public openCreateUserDialog(): void {
     const dialogRef = this.dialog.open(CreateUserModalComponent, {
       width: '250px',
     });
 
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
+  }
+
+  public openUpdateUserDialog(id:number): void {
+    const dialogRef = this.dialog.open(UpdateUserModalComponent, {
+      data: { id: id },
+      width: '250px',
+    });
+
+    let users = this.users.map(function(user){
+      let newUser;
+      if(user.id ==id)
+      {
+        
+      }
+    })
+    // console.log(user)
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      console.log();
     });
   }
+
+  public openDeleteUserDialog(id:number): void {
+    const dialogRef = this.dialog.open(DeleteUserModalComponent, {
+      data: { id: id },
+      width: '250px',
+    });
+    let user =   this.users.findIndex(user => id == user.id);
+    this.users.splice(user,1);
+    
+    // dialogRef.afterClosed().subscribe(result => {
+    
+    //   console.log(user)
+    // });
+  //  this.currentPage++;
+}
 
   public getUsers(): void {
     this.tableService.getUsers(this.countItem, this.currentPage, localStorage.getItem('token')).subscribe(
@@ -51,7 +87,7 @@ export class TableComponent implements OnInit {
 
         console.log(this.users)
       });
-    this.currentPage++;
+    // this.currentPage++;
   }
 
   public logout() {

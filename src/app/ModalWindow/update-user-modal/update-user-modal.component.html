@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <form class="form" [formGroup]="formGroup">
+                <mat-form-field class="input">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="nameControl" name="name" />
+                    <mat-hint align="start"><strong>Please,input name</strong> </mat-hint>
+                    <mat-error
+                        *ngIf="formGroup.controls['nameControl'].hasError('required') && formGroup.controls['nameControl'].touched">
+                        Please enter a <strong>e-mail</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="input">
+                    <mat-label>E-Mail</mat-label>
+                    <input matInput formControlName="emailControl" name="name" />
+                    <mat-hint align="start"><strong>Please,input e-mail</strong> </mat-hint>
+                    <mat-error
+                        *ngIf="formGroup.controls['emailControl'].hasError('required') && formGroup.controls['emailControl'].touched">
+                        Please enter a <strong>e-mail</strong>
+                    </mat-error>
+                    <mat-error
+                        *ngIf="formGroup.controls['emailControl'].hasError('email') && formGroup.controls['emailControl'].touched">
+                        Example: <strong>name@service.com</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="input">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="roleControl">
+                        <mat-option *ngFor="let role of roles" [value]="role.value">
+                          {{role.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    <mat-hint align="start"><strong>Please,input role</strong> </mat-hint>
+                    <mat-error
+                        *ngIf="formGroup.controls['roleControl'].hasError('required') && formGroup.controls['roleControl'].touched">
+                        Please enter a <strong>role</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="input">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="passwordControl" name="name" />
+                    <mat-hint align="start"><strong>Please,input password</strong> </mat-hint>
+                    <mat-error
+                        *ngIf="formGroup.controls['passwordControl'].hasError('required') && formGroup.controls['passwordControl'].touched">
+                        Please enter a <strong>password</strong>
+                    </mat-error>
+                    <mat-error
+                        *ngIf="formGroup.controls['passwordControl'].hasError('pattern') && formGroup.controls['passwordControl'].touched">
+                        Password must be at least 8 <strong>8</strong> characters
+                    </mat-error>
+                </mat-form-field>
+                <div mat-dialog-actions>
+                    <button mat-button (click)="onNoClick()">No Thanks</button>
+                    <button mat-button (click)="updateUser()" cdkFocusInitial>Ok</button>
+                </div>
+                <p *ngIf="responseID">User succsessful created</p>
+                <p *ngIf="error">{{error}}</p>
+            </form>
+        </div>
+    </div>
+</div>
+

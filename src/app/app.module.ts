@@ -20,6 +20,8 @@ import { ErrorComponent } from './Errors/error/error.component';
 import { RouterModule } from '@angular/router';
 import { Rout } from './Routing/route';
 import { CreateUserModalComponent } from './ModalWindow/create-user-modal/create-user-modal.component';
+import { DeleteUserModalComponent } from './ModalWindow/delete-user-modal/delete-user-modal.component';
+import { UpdateUserModalComponent } from './ModalWindow/update-user-modal/update-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { CreateUserModalComponent } from './ModalWindow/create-user-modal/create
     TableComponent,
     ErrorComponent,
     CreateUserModalComponent,
+    DeleteUserModalComponent,
+    UpdateUserModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ import { CreateUserModalComponent } from './ModalWindow/create-user-modal/create
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DeleteUserModalComponent,UpdateUserModalComponent],
 })
 export class AppModule { }
