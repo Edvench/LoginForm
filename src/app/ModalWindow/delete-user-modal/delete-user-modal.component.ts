@@ -28,12 +28,20 @@ export class DeleteUserModalComponent implements OnInit {
       response => {
         if(response){
           this.success = true;         
-          this.dialogRef.close();
+          this.checkStatusAndCloseDialog("ok");
         }
         console.log(response);
       },
        error => {this.error = error.error;console.log(error.error)
        });
+  }
+
+  checkStatusAndCloseDialog(status:string): void {
+    this.dialogRef.close(status);
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
 }

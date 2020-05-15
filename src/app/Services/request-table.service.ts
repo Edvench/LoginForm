@@ -47,6 +47,7 @@ export class RequestTableService {
 
   public deleteUsers(id: number, token: string): Observable<any> {
     console.log(id);
+    console.log(token);
     const myHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.delete(this.apiEndPoint + "user/" + id, { headers: myHeaders });
   }

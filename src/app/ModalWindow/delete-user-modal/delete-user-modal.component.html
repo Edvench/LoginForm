@@ -3,7 +3,7 @@
         <div class="row">
             <div class="content">Are you sure you want to delete the selected user?</div>
             <div mat-dialog-actions>
-                <button mat-button color="primary" (click)="onNoClick()">Don't delete</button>
+                <button mat-button color="primary" (click)="closeDialog()">Don't delete</button>
                 <button mat-button color="primary" (click)="deleteUser()" cdkFocusInitial>Delete</button>
             </div>
             <p *ngIf="success">User succsessful deleted</p>

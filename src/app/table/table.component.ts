@@ -65,9 +65,15 @@ export class TableComponent implements OnInit {
       data: { id: id },
       width: '250px',
     });
-    let user =   this.users.findIndex(user => id == user.id);
-    this.users.splice(user,1);
-    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result = "ok")
+      {
+         let user =   this.users.findIndex(user => id == user.id);
+        this.users.splice(user,1);
+      }
+
+    });   
 }
 
   public getUsers(): void {
