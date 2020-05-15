@@ -1,3 +1,23 @@
 table {
     width: 100%;
   }
+
+  .logout{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+  
+  .moreUsers{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+
+  .btn{
+    margin:15px;
+  }

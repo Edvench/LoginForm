@@ -29,8 +29,8 @@
                         Password must be at least 8 <strong>8</strong> characters
                     </mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" type="button" [disabled]="formGroup.invalid"
-                    (click)="authorization()">Enter</button>
+                <button mat-raised-button color="primary" class="btn" [disabled]="formGroup.invalid"
+                    (click)="authorization()">Login</button>
                 <p *ngIf="error" class="text-center error">{{error}}</p>
             </form>
         </div>

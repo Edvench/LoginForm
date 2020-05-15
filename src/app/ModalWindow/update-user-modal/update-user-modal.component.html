@@ -53,14 +53,17 @@
                         Password must be at least 8 <strong>8</strong> characters
                     </mat-error>
                 </mat-form-field>
-                <div mat-dialog-actions>
-                    <button mat-button (click)="closeDialog()">
-                        <mat-icon aria-hidden="false">home</mat-icon>
-                    </button>
-                    <button mat-button (click)="updateUser()" cdkFocusInitial>Ok</button>
+                <div mat-dialog-actions class="buttons-container">
+                   
+                    <button mat-mini-fab color="primary" (click) = "closeDialog()" >
+                        <mat-icon>home</mat-icon>
+                      </button>
+                    <button  mat-raised-button color="primary" (click)="updateUser()" cdkFocusInitial>Update</button>
                 </div>
-                <p *ngIf="responseID">User succsessful updated</p>
+                <div class="responce-content">
+                <p *ngIf="responceSuccess">User succsessful updated</p>
                 <p *ngIf="error">{{error}}</p>
+                </div>
             </form>
         </div>
     </div>

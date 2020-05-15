@@ -17,6 +17,7 @@ interface Role {
 export class CreateUserModalComponent implements OnInit {
   private formGroup:FormGroup;
   private error:boolean = false;
+  private visible:boolean = true;
   private createSuccess:boolean = false;
   public roles: Role[] = [
     {value: 'admin', viewValue: 'admin'},
@@ -50,6 +51,7 @@ export class CreateUserModalComponent implements OnInit {
       response => {
         if(response){
           this.createSuccess = true;
+          this.visible = false;
         }
         
       },

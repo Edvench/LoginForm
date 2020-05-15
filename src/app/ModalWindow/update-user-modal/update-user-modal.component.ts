@@ -29,6 +29,7 @@ export class UpdateUserModalComponent implements OnInit {
 
   private error:boolean = false;
   private responceSuccess:boolean = false;
+  private success:boolean = false;
   public roles: Role[] = [
     {value: 'admin', viewValue: 'admin'},
     {value: 'user', viewValue: 'user'}
@@ -62,6 +63,7 @@ export class UpdateUserModalComponent implements OnInit {
     ).subscribe(
       response => {
         if(response){   
+          this.success = true;
           this.updatedUser.id = this.data.id;
           this.updatedUser.name = response.name;
           this.updatedUser.email = this.formGroup.controls["emailControl"].value,

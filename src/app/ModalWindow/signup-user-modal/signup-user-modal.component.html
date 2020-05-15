@@ -39,12 +39,17 @@
                         Password must be at least 8 <strong>8</strong> characters
                     </mat-error>
                 </mat-form-field>
-                <div mat-dialog-actions>
-                    <button mat-button (click)="onNoClick()">No Thanks</button>
-                    <button mat-button (click)="signUp()" cdkFocusInitial>Ok</button>
+                
+                <div mat-dialog-actions class="buttons-container">
+                    <button mat-mini-fab color="primary" (click) = "closeDialog()" >
+                        <mat-icon>home</mat-icon>
+                      </button>
+                    <button *ngIf="visible" mat-raised-button color="primary" 
+                    [disabled]="formGroup.invalid" (click)="signUp()" cdkFocusInitial>Register</button>
+                    <p class="responce-content" *ngIf="success">You are successfully registered, go to the login page</p>
+                    <p class="responce-content" *ngIf="error">{{error}}</p>
                 </div>
-                <p *ngIf="success">You are successfully registered, go to the login page</p>
-                <p *ngIf="error">{{error}}</p>
+                
             </form>
         </div>
     </div>

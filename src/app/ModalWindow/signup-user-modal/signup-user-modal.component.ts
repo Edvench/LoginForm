@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class SignupUserModalComponent implements OnInit {
   private formGroup:FormGroup;
   private error:boolean = false;
+  private visible:boolean = true;
   private success:boolean = false;
   constructor(private fb:FormBuilder,
     private dialogRef: MatDialogRef<SignupUserModalComponent>,
@@ -37,14 +38,15 @@ export class SignupUserModalComponent implements OnInit {
       response =>{
         if(response){   
           this.success = true;
+          this.visible = false
         }
       },
        error => {this.error = error.error;console.log(error.error)
        });
   }
 
-  // closeDialog():void {
-  //   this.dialogRef.close();
-  // }
+  closeDialog():void {
+    this.dialogRef.close();
+  }
 
 }
