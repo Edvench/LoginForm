@@ -50,4 +50,5 @@ export class RequestTableService {
     const myHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.delete(this.apiEndPoint + "user/" + id, { headers: myHeaders });
   }
+
 }

@@ -17,7 +17,17 @@ interface Role {
 })
 export class UpdateUserModalComponent implements OnInit {
   private formGroup:FormGroup;
+  private currentUser:User = 
+  {
+    id:this.data.id,
+    name:'',
+    email:'',
+    role:'',
+    password:''
+
+  };
   private error:boolean = false;
+  private responceSuccess:boolean = false;
   public roles: Role[] = [
     {value: 'admin', viewValue: 'admin'},
     {value: 'user', viewValue: 'user'}
@@ -49,31 +59,25 @@ export class UpdateUserModalComponent implements OnInit {
     ).subscribe(
       response => {
         if(response){   
-          this.onNoClick();
+          this.currentUser.name = response.name;
+          this.currentUser.email = this.formGroup.controls["emailControl"].value,
+          this.currentUser.role = this.formGroup.controls["roleControl"].value;
+          this.currentUser.password = this.formGroup.controls["passwordControl"].value;
+          this.closeDialog(this.currentUser);
           
         }
-        console.log(response);
       },
        error => {this.error = error.error;console.log(error.error)
        });
+       
 }
 
-  onNoClick(): Observable<User> {
-    let user:User = {
-    'id': this.data.id,
-    'name': this.formGroup.controls["nameControl"].value,
-    'email': this.formGroup.controls["emailControl"].value, 
-    'role':this.formGroup.controls["roleControl"].value,
-    'password': this.formGroup.controls["passwordControl"].value 
-    };
-  
-    console.log(user);
-    // user.name = this.formGroup.controls["nameControl"].value,
-    // user.email = this.formGroup.controls["emailControl"].value, 
-    // user.role = this.formGroup.controls["roleControl"].value,
-    // user.password = this.formGroup.controls["passwordControl"].value 
+closeDialog(user) {
+  this.dialogRef.close(user);
+}
+
+  onNoClick(): void{
     this.dialogRef.close();
-    return 
   }
 
 

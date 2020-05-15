@@ -21,7 +21,7 @@
 </mat-table>
 
 <p *ngIf="users.length">
-    <button mat-raised-button color="primary"  type="button"
+    <button mat-raised-button color="primary"  type="button" [disabled]=" countPage + 1  == currentPage"
         (click)="getUsers()">More Users</button>
 
     <button mat-raised-button (click)="openCreateUserDialog()">Add User</button>
