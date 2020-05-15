@@ -54,10 +54,12 @@
                     </mat-error>
                 </mat-form-field>
                 <div mat-dialog-actions>
-                    <button mat-button (click)="onNoClick()">No Thanks</button>
+                    <button mat-button (click)="closeDialog()">
+                        <mat-icon aria-hidden="false">home</mat-icon>
+                    </button>
                     <button mat-button (click)="updateUser()" cdkFocusInitial>Ok</button>
                 </div>
-                <p *ngIf="responseID">User succsessful created</p>
+                <p *ngIf="responseID">User succsessful updated</p>
                 <p *ngIf="error">{{error}}</p>
             </form>
         </div>

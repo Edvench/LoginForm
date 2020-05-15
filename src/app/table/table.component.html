@@ -10,10 +10,12 @@
     </ng-container>
 
     <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef> 
-            <button mat-raised-button color="primary" (click)="openDeleteUserDialog(user.id)">Delete User</button>
-            <button mat-raised-button color="primary" (click)="openUpdateUserDialog(user.id)">Update User</button>
+        
+        <mat-header-cell *matHeaderCellDef > 
+            <button *ngIf="access" mat-raised-button color="primary" (click)="openDeleteUserDialog(user.id)">Delete User</button>
+            <button *ngIf="access" mat-raised-button color="primary" (click)="openUpdateUserDialog(user.id)">Update User</button>
         </mat-header-cell>
+       
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

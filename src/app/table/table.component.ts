@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateUserModalComponent } from '../ModalWindow/create-user-modal/create-user-modal.component';
 import { DeleteUserModalComponent } from '../ModalWindow/delete-user-modal/delete-user-modal.component';
 import { UpdateUserModalComponent } from '../ModalWindow/update-user-modal/update-user-modal.component';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -19,7 +20,15 @@ export class TableComponent implements OnInit {
   private currentPage: number = 1;
   private countPage: number;
   private userId:number;
-  displayedColumns: string[] = ['name', 'email','options'];
+  private role:string;
+  private access:boolean = false;
+  private displayedColumns: string[] = ['name', 'email','options'];
+  private currentUser:any = {
+    name:'',
+    email:'',
+    role:'',
+
+  };
 
 
 
@@ -31,6 +40,12 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
+    this.role = localStorage.getItem('role');
+    console.log(this.role)
+    if(this.role == "admin")
+    {
+      this.access = true;
+    }
   }
 
   public openCreateUserDialog(): void {
@@ -41,16 +56,28 @@ export class TableComponent implements OnInit {
   }
 
   public openUpdateUserDialog(id:number): void {
+    
+    let userIndex = this.users.findIndex(user=>user.id == id);
+    let user = this.users[userIndex]
+    this.currentUser = {
+      'name' : user.name,
+      'email' : user.email,
+      'role':user.role,
+    }
+    
     const dialogRef = this.dialog.open(UpdateUserModalComponent, {
-      data: { id: id },
+      data: { id: id,
+        name:this.currentUser.name,
+        email:this.currentUser.email,
+        role:this.currentUser.role,},
       width: '250px',
     });
+    console.log(this.currentUser)
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       let userIndex = this.users.findIndex(user=>user.id == id);
       console.log(userIndex);
-      this.users[userIndex] = {
+       this.users[userIndex] = {
         'id':result.id,
         'name' : result.name,
         'email' : result.email,
@@ -67,9 +94,9 @@ export class TableComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result = "ok")
+      if(result == "ok")
       {
-         let user =   this.users.findIndex(user => id == user.id);
+        let user =   this.users.findIndex(user => id == user.id);
         this.users.splice(user,1);
       }
 

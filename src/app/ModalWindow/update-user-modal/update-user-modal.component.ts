@@ -17,7 +17,7 @@ interface Role {
 })
 export class UpdateUserModalComponent implements OnInit {
   private formGroup:FormGroup;
-  private currentUser:User = 
+  private updatedUser:User = 
   {
     id:this.data.id,
     name:'',
@@ -26,6 +26,7 @@ export class UpdateUserModalComponent implements OnInit {
     password:''
 
   };
+
   private error:boolean = false;
   private responceSuccess:boolean = false;
   public roles: Role[] = [
@@ -37,19 +38,21 @@ export class UpdateUserModalComponent implements OnInit {
     private dialogRef: MatDialogRef<UpdateUserModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.formGroup = fb.group({
-        nameControl:     ["", [ Validators.required]],
-        emailControl:     ["", [ Validators.required,
+        nameControl:     [this.data.name, [ Validators.required]],
+        emailControl:     [this.data.email, [ Validators.required,
                                  Validators.email]],
-        roleControl:     ["", [ Validators.required]],
-        passwordControl:     ["", [ Validators.required,
+        roleControl:     [this.data.role, [ Validators.required]],
+        passwordControl:     ['', [ Validators.required,
                                     Validators.pattern('^[a-z]{4,100}$')]]                         
       })
     }
 
   ngOnInit() {
+
   }
 
   public updateUser() {
+    console.log(this.data.id)
     this.tableService.updateUser(this.data.id,
       localStorage.getItem('token'),
     this.formGroup.controls["nameControl"].value,
@@ -59,11 +62,12 @@ export class UpdateUserModalComponent implements OnInit {
     ).subscribe(
       response => {
         if(response){   
-          this.currentUser.name = response.name;
-          this.currentUser.email = this.formGroup.controls["emailControl"].value,
-          this.currentUser.role = this.formGroup.controls["roleControl"].value;
-          this.currentUser.password = this.formGroup.controls["passwordControl"].value;
-          this.closeDialog(this.currentUser);
+          this.updatedUser.id = this.data.id;
+          this.updatedUser.name = response.name;
+          this.updatedUser.email = this.formGroup.controls["emailControl"].value,
+          this.updatedUser.role = this.formGroup.controls["roleControl"].value;
+          this.updatedUser.password = this.formGroup.controls["passwordControl"].value;
+          this.closeDialogWithUpdate(this.updatedUser);
           
         }
       },
@@ -72,8 +76,16 @@ export class UpdateUserModalComponent implements OnInit {
        
 }
 
-closeDialog(user):void {
+closeDialogWithUpdate(user):void {
   this.dialogRef.close(user);
 }
 
+closeDialog():void {
+  this.dialogRef.close();
+}
+
+// public getCurrentUser(id:number){
+//   id = this.data.id;
+  
+// }
 }

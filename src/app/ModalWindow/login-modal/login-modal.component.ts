@@ -13,8 +13,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class LoginModalComponent implements OnInit {
 
   private formGroup:FormGroup;
-  private token: string;
-  private role:string;
+  // private token: string;
+  // private role:string;
   private users: User[] = []; 
   private error:boolean = false;
   
@@ -39,13 +39,17 @@ export class LoginModalComponent implements OnInit {
   
   public authorization():void{
     let token;
+    let role;
     this.auth.getToken(
       this.formGroup.controls["emailControl"].value,
       this.formGroup.controls["passwordControl"].value,
     ).subscribe(response => {
       token = response.body.token;
+      role = response.body.role;
       localStorage.setItem('token', token);
+      localStorage.setItem('role',role)
       console.log(token);
+      console.log(role);
       localStorage.setItem('isLoggedIn', "true");  
       localStorage.setItem('token',token);
       this.router.navigate(['table']);
