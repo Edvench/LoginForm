@@ -17,7 +17,7 @@ interface Role {
 export class CreateUserModalComponent implements OnInit {
   private formGroup:FormGroup;
   private error:boolean = false;
-  private responseID:boolean = false;
+  private createSuccess:boolean = false;
   public roles: Role[] = [
     {value: 'admin', viewValue: 'admin'},
     {value: 'user', viewValue: 'user'}
@@ -40,7 +40,7 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   public addUser() {
-    this.responseID = false;
+    this.createSuccess = false;
     this.tableService.createUser(
     this.formGroup.controls["nameControl"].value,
     this.formGroup.controls["emailControl"].value, 
@@ -48,13 +48,16 @@ export class CreateUserModalComponent implements OnInit {
     this.formGroup.controls["passwordControl"].value, 
     localStorage.getItem('token')).subscribe(
       response => {
-        this.responseID = response.id;
+        if(response){
+          this.createSuccess = true;
+        }
+        
       },
       error => {this.error = error.error.email;
       });
   }
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 

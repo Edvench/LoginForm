@@ -10,10 +10,10 @@ import {MatTableModule} from '@angular/material/table';
 import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthorizationComponent } from './LoginModal/login-modal.component';
 import { AuthorizationService } from './Services/authorization.service';
 import { TableComponent } from './table/table.component';
 import { ErrorComponent } from './Errors/error/error.component';
@@ -22,16 +22,21 @@ import { Rout } from './Routing/route';
 import { CreateUserModalComponent } from './ModalWindow/create-user-modal/create-user-modal.component';
 import { DeleteUserModalComponent } from './ModalWindow/delete-user-modal/delete-user-modal.component';
 import { UpdateUserModalComponent } from './ModalWindow/update-user-modal/update-user-modal.component';
+import { SignupUserModalComponent } from './ModalWindow/signup-user-modal/signup-user-modal.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LoginModalComponent } from './ModalWindow/login-modal/login-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthorizationComponent,
     TableComponent,
     ErrorComponent,
     CreateUserModalComponent,
     DeleteUserModalComponent,
     UpdateUserModalComponent,
+    SignupUserModalComponent,
+    HomePageComponent,
+    LoginModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { UpdateUserModalComponent } from './ModalWindow/update-user-modal/update
     RouterModule.forRoot(Rout),
     MatTableModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [
     AuthorizationService,
@@ -56,6 +62,9 @@ import { UpdateUserModalComponent } from './ModalWindow/update-user-modal/update
     CUSTOM_ELEMENTS_SCHEMA
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteUserModalComponent,UpdateUserModalComponent],
+  entryComponents: [
+    DeleteUserModalComponent,
+    UpdateUserModalComponent,
+    SignupUserModalComponent],
 })
 export class AppModule { }

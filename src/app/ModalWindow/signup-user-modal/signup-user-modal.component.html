@@ -27,20 +27,6 @@
                 </mat-form-field>
 
                 <mat-form-field class="input">
-                    <mat-label>Role</mat-label>
-                    <mat-select formControlName="roleControl">
-                        <mat-option *ngFor="let role of roles" [value]="role.value">
-                            {{role.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-hint align="start"><strong>Please,input role</strong> </mat-hint>
-                    <mat-error
-                        *ngIf="formGroup.controls['roleControl'].hasError('required') && formGroup.controls['roleControl'].touched">
-                        Please enter a <strong>role</strong>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="input">
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="passwordControl" name="name" />
                     <mat-hint align="start"><strong>Please,input password</strong> </mat-hint>
@@ -54,17 +40,14 @@
                     </mat-error>
                 </mat-form-field>
                 <div mat-dialog-actions>
-                    <button mat-button (click)="closeDialog()">
-                        <mat-icon aria-hidden="false">home</mat-icon>
-                    </button>
-
-                    <button mat-button (click)="addUser()" cdkFocusInitial>Create</button>
-
-
+                    <button mat-button (click)="onNoClick()">No Thanks</button>
+                    <button mat-button (click)="signUp()" cdkFocusInitial>Ok</button>
                 </div>
-                <p *ngIf="createSuccess">User succsessful created</p>
+                <p *ngIf="success">You are successfully registered, go to the login page</p>
                 <p *ngIf="error">{{error}}</p>
             </form>
         </div>
     </div>
 </div>
+
+

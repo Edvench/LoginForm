@@ -24,21 +24,16 @@ export class DeleteUserModalComponent implements OnInit {
   }
 
   public deleteUser(){
-    
     this.tableService.deleteUsers(this.data.id,localStorage.getItem('token')).subscribe(
       response => {
-        if(response == "ok"){
+        if(response){
           this.success = true;         
-          this.onNoClick();
+          this.dialogRef.close();
         }
         console.log(response);
       },
        error => {this.error = error.error;console.log(error.error)
        });
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
 }

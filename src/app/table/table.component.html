@@ -11,8 +11,8 @@
 
     <ng-container matColumnDef="options">
         <mat-header-cell *matHeaderCellDef> 
-            <button mat-raised-button (click)="openDeleteUserDialog(user.id)">Delete User</button>
-            <button mat-raised-button (click)="openUpdateUserDialog(user.id)">Update User</button>
+            <button mat-raised-button color="primary" (click)="openDeleteUserDialog(user.id)">Delete User</button>
+            <button mat-raised-button color="primary" (click)="openUpdateUserDialog(user.id)">Update User</button>
         </mat-header-cell>
     </ng-container>
 
@@ -24,7 +24,7 @@
     <button mat-raised-button color="primary"  type="button" [disabled]=" countPage + 1  == currentPage"
         (click)="getUsers()">More Users</button>
 
-    <button mat-raised-button (click)="openCreateUserDialog()">Add User</button>
+    <button mat-raised-button color="primary" (click)="openCreateUserDialog()">Add User</button>
     
 </p>
 

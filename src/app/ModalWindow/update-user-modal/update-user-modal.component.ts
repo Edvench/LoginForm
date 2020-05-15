@@ -72,13 +72,8 @@ export class UpdateUserModalComponent implements OnInit {
        
 }
 
-closeDialog(user) {
+closeDialog(user):void {
   this.dialogRef.close(user);
 }
-
-  onNoClick(): void{
-    this.dialogRef.close();
-  }
-
 
 }
