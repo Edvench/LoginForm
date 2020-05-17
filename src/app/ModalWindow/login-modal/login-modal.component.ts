@@ -13,8 +13,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class LoginModalComponent implements OnInit {
 
   private formGroup:FormGroup;
-  // private token: string;
-  // private role:string;
   private users: User[] = []; 
   private error:boolean = false;
   
@@ -29,7 +27,7 @@ export class LoginModalComponent implements OnInit {
       emailControl:     ["", [ Validators.required,
                                Validators.email]],
       passwordControl:     ["", [ Validators.required,
-                                  Validators.pattern('^[a-z]{4,100}$')]]                         
+                                  Validators.pattern('[0-9a-zA-Z]{4,8}')]]                         
     })
   }
 

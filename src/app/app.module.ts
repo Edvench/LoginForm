@@ -56,7 +56,6 @@ import { LoginModalComponent } from './ModalWindow/login-modal/login-modal.compo
     AuthorizationService,
     AuthGuard,
     RouterModule
-    
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

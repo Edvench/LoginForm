@@ -1,12 +1,12 @@
 <div class="logout">
 
     <div *ngIf="users.length">
-    <button class="btn" button *ngIf="access" mat-raised-button color="primary"
+    <button class="btn" button *ngIf="adminRights" mat-raised-button color="primary"
         (click)="openCreateUserDialog()">Add User</button>
     </div>
 
 
-    <button class="btn" mat-raised-button color="primary" type="button" (click)="logout()">Logouut</button>
+    <button class="btn" mat-raised-button color="primary" type="button" (click)="logout()">Logout</button>
 </div>
 <mat-table [users]="users" *ngFor="let user of users" class="mat-elevation-z8">
 
@@ -21,9 +21,9 @@
     <ng-container matColumnDef="options">
 
         <mat-header-cell *matHeaderCellDef>
-            <button class="btn" *ngIf="access" mat-raised-button color="primary"
+            <button class="btn" *ngIf="adminRights" mat-raised-button color="primary"
                 (click)="openDeleteUserDialog(user.id)">Delete User</button>
-            <button class="btn" *ngIf="access" mat-raised-button color="primary"
+            <button class="btn" *ngIf="adminRights" mat-raised-button color="primary"
                 (click)="openUpdateUserDialog(user.id)">Update User</button>
         </mat-header-cell>
 

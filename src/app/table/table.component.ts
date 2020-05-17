@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateUserModalComponent } from '../ModalWindow/create-user-modal/create-user-modal.component';
 import { DeleteUserModalComponent } from '../ModalWindow/delete-user-modal/delete-user-modal.component';
 import { UpdateUserModalComponent } from '../ModalWindow/update-user-modal/update-user-modal.component';
-import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -16,18 +15,17 @@ import { EmailValidator } from '@angular/forms';
 })
 export class TableComponent implements OnInit {
   private users: User[] = [];
-  private countItem: number = 5;
+  private countItem: number  = 5;
   private currentPage: number = 1;
   private countPage: number;
-  private userId:number;
   private role:string;
-  private access:boolean = false;
+  private adminRights:boolean = false;
   private displayedColumns: string[] = ['name', 'email','options'];
   private currentUser:any = {
     name:'',
     email:'',
     role:'',
-
+    password:''
   };
 
 
@@ -36,15 +34,14 @@ export class TableComponent implements OnInit {
     private auth: AuthorizationService,
     private tableService: RequestTableService,
     private router: Router,
-    public dialog: MatDialog) { }
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getUsers();
     this.role = localStorage.getItem('role');
-    console.log(this.role)
     if(this.role == "admin")
     {
-      this.access = true;
+      this.adminRights = true;
     }
   }
 
@@ -56,20 +53,23 @@ export class TableComponent implements OnInit {
   }
 
   public openUpdateUserDialog(id:number): void {
-    
     let userIndex = this.users.findIndex(user=>user.id == id);
     let user = this.users[userIndex]
+    console.log(user.password)
     this.currentUser = {
       'name' : user.name,
       'email' : user.email,
       'role':user.role,
+      'password':user.password,
     }
     
     const dialogRef = this.dialog.open(UpdateUserModalComponent, {
       data: { id: id,
         name:this.currentUser.name,
         email:this.currentUser.email,
-        role:this.currentUser.role,},
+        role:this.currentUser.role,
+        password:this.currentUser.password,
+      },
       width: '250px',
     });
     console.log(this.currentUser)
